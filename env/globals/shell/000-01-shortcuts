@@ -1,0 +1,25 @@
+#!/usr/bin/env zsh
+# ====================================================== #
+#     01. GLOBAL SHORTCUTS                               #
+# ====================================================== #
+
+# Clear
+alias c='clear'
+
+# Copy
+alias cp='cp -iv';
+
+# List
+alias ls='ls -laG';
+
+# Move
+alias mv='mv -iv';
+
+# Make directory
+alias mkdir='mkdir -pv';
+
+# Make directory and change directory
+function mkcd() {
+  mkdir $1 && cd $1;
+}
+

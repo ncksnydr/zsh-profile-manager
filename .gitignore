@@ -1,0 +1,113 @@
+# --------------------------------------------------------------------------
+#   GIT IGNORE 
+# --------------------------------------------------------------------------
+
+
+#   Project-specific
+# ------------------------------------------------------------
+
+# Any file in the `env` directory that contains an underscore (private).
+env/**/*_*
+
+# Any directory for credentials.
+**/creds/**
+
+# Build directory
+build/
+
+
+#    Package Managers
+# ------------------------------------------------------------
+
+# Node/Yarn
+lib-cov
+lcov.info
+pids
+logs
+results
+node_modules
+.node_history
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Composer
+vendor
+
+
+#    Operating systems and IDEs
+# ------------------------------------------------------------
+# Operating systems: macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+.Spotlight-V100
+.Trashes
+._*
+
+# Operating systems: Linux
+*~
+
+# Operating systems: Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+.vs/
+
+# IDE: Visual Studio
+.vscode/
+
+
+#    Files
+# ------------------------------------------------------------
+*#
+.idea
+.env
+.tmp
+*.log
+*.sql
+*.sqlite
+*.sqlite3
+
+# Binary files: media
+*.gif
+*.jpg
+*.m4v
+*.mp4
+*.ogg
+*.ogv
+*.png
+*.webm
+*.webp
+
+# Binary files: packages
+*.7z
+*.csv
+*.dat
+*.dmg
+*.gz
+*.gz.zip
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.seed
+*.so
+*.swo
+*.swp
+*.swn
+*.swm
+*.out
+*.pid

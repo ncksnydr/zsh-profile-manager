@@ -1,0 +1,38 @@
+#!/usr/bin/env zsh
+# ====================================================== #
+#     DEPLOY                                             #
+# ====================================================== #
+
+#   Set variables
+# ------------------------------------------------------------
+ROOT=$PWD;
+source $ROOT/config/editor-config;
+source $ROOT/.env;
+BUILD_DIR=$ROOT/$BUILD_PATH;
+
+
+#   Announce
+# ------------------------------------------------------------
+e-header "DEPLOY PROJECT"
+
+
+#   Create build placeholder
+# ------------------------------------------------------------
+e-task "Creating build directories...";
+mkdir -p $BUILD_DIR/globals;
+mkdir -p $BUILD_DIR/themes;
+e-check;
+
+
+#   Copy files
+# ------------------------------------------------------------
+e-task "Copying global and environment-specific files...";
+cp $ROOT/env/globals/shell/* $BUILD_DIR/globals
+cp $ROOT/env/globals/themes/* $BUILD_DIR/themes
+cp -r $ROOT/env/server/ $BUILD_DIR
+e-check;
+
+
+#   Success
+# ------------------------------------------------------------
+e-success "Success: project built"

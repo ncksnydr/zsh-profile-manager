@@ -1,0 +1,77 @@
+#!/usr/bin/env zsh
+# ====================================================== #
+#     DEPLOY                                             #
+# ====================================================== #
+
+#   Set variables
+# ------------------------------------------------------------
+ROOT=$PWD;
+source $ROOT/config/editor-config;
+source $ROOT/.env;
+
+
+#   Announce
+# ------------------------------------------------------------
+e-header "DEPLOY PROJECT"
+
+
+#   Methods
+# ------------------------------------------------------------
+
+#  help
+#  Provide a usage manual for the user.
+#  @function
+
+help() {
+	e-header "deploy HELP";
+	e-underline "${black}Usage${reset}";
+	printf "${bold}${white}npm run deploy -- [--prod] [--prodTest] ${reset}\n";
+	printf "\n\n";
+	exit 0;
+}
+
+
+#  sync
+#  Provide a usage manual for the user.
+#  @function
+
+sync() {
+	e-task "Deploying to $ENV...";
+	rsync $VARS -e 'ssh' --size-only --exclude ".*" --exclude ".*/" $LOCAL_PATH/* $REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH;
+}
+
+
+
+#   Primary logic
+# ------------------------------------------------------------
+
+while [[ ! -z $1 ]]; do
+	ARG="$1"
+	shift
+	case "$ARG" in
+		--prodTest)
+			ENV="Production"
+			VARS="-ahvun";
+			LOCAL_PATH=$BUILD_PATH;
+			REMOTE_HOST=$PRODUCTION_HOST;
+			REMOTE_PATH=$PRODUCTION_PATH;
+			REMOTE_USER=$PRODUCTION_USER;
+			sync;
+			e-success "Deployment test to $ENV passed.";
+			;;
+
+		--prod)
+			ENV="Production"
+			VARS="-ahvu";
+			LOCAL_PATH=$BUILD_PATH;
+			REMOTE_HOST=$PRODUCTION_HOST;
+			REMOTE_PATH=$PRODUCTION_PATH;
+			REMOTE_USER=$PRODUCTION_USER;
+			sync;
+			e-success "Deployed to $ENV";
+			;;
+		*)
+			help
+			;;
+	esac
+done

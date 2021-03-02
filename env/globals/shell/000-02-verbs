@@ -1,0 +1,135 @@
+#!/usr/bin/env zsh
+
+# ====================================================== #
+#     02. VERBS (GLOBALS)                                #
+# ====================================================== #
+#         Convert                                        #
+#         Count                                          #
+#         Create                                         #
+#         Edit                                           #
+#         Find                                           #
+#         Get                                            #
+#         Kill                                           #
+#         Restart                                        #
+#         Show                                           #
+# ====================================================== #
+
+
+
+#   Convert
+# ------------------------------------------------------------
+# Convert audio from .mp3 to .webm.
+function convert-audio {
+	for i in *.mp3; do
+		ffmpeg -i $i -c:a libopus -b:a 64k -f webm $(basename "${i/.mp3}").webm;
+    sleep 5;
+	done
+}
+
+
+# Convert video from .mp4 to .webm.
+function convert-video {
+	for i in *.mp4 ; do
+		ffmpeg -i $i -c:v libvpx-vp9 -pass 1 -b:v 1500K -threads 8 -speed 4 -tile-columns 6 -frame-parallel 1 -an -f webm null/
+		ffmpeg -i $i -c:v libvpx-vp9 -pass 2 -b:v 1500K -threads 8 -speed 1 -tile-columns 6 -frame-parallel 1 -auto-alt-ref 1 -lag-in-frames 25 -c:a libopus -b:a 64k -f webm $(basename "${i/.mp4}").webm;
+    sleep 5;
+	done
+}
+
+
+#   Count
+# ------------------------------------------------------------
+# Count the number of files in a directory.
+alias count-files='echo $(ls -1 | wc -l)';
+
+
+
+#   Create
+# ------------------------------------------------------------
+# Remove .DS_Store, remove vendor files, and create a .zip archive.
+function create-archive {
+	echo $(kill-ds);
+	echo $(kill-vendor);
+	zip -r "archive_$(date +%Y-%m-%d).zip" . ;
+}
+
+
+# Create an animated .gif file from a video file.
+function create-gif() {
+	if [ -z "$1" ]; then
+		echo 'Error: you need to specific a video file.';
+	else
+		FILE="$1";
+		FILENAME="${FILE%%.*}";
+		EXTENSION="${FILE#*.}";
+		ffmpeg -i "$FILE" -vf scale=800:-1 -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=3 > "$FILENAME".gif;
+	fi
+}
+
+
+
+#   Edit
+# ------------------------------------------------------------
+# Edit crontab.
+alias edit-cron="crontab -e";
+
+
+#   Find
+# ------------------------------------------------------------
+# Create a list of PIDs.
+function find-pid {
+	lsof -t -c "$@";
+}
+
+
+#    Get
+# ------------------------------------------------------------
+# Get directory size
+function get-dir-size {
+	du -hcs "$@";
+}
+
+
+#   Kill
+# ------------------------------------------------------------
+# Removes all `vendor` and `node_modules` directories and files.
+function kill-vendor {
+	find . -name {node_modules,vendor} -type d -exec rm -r {} +;
+	printf "${CYAN} Vendor directories removed${NC}";
+}
+
+
+#   Restart
+# ------------------------------------------------------------
+# Flush the DNS.
+alias restart-dns='dscacheutil -flushcache';
+
+
+# Reflow Git repository.
+function restart-git() {
+	git rm -r --cached .;
+	git add .;
+	git commit -m "Removed ignored files";
+}
+
+
+
+#   Set
+# ------------------------------------------------------------
+# Set permissions for files and folders.
+function set-permissions {
+	find . -type f -exec chmod 644 {} \;
+	find . -type d -exec chmod 755 {} \;
+}
+
+
+#   Show
+# ------------------------------------------------------------
+# Show current IP.
+alias show-ip='curl ip.appspot.com';
+
+# Show which program(s) are hogging CPU.
+alias show-hogs-cpu='ps wwaxr -o pid,stat,%cpu,time,command | head -10';
+
+# See which program(s) are hogging memory.
+alias show-hogs-memory='top -l 1 -o rsize | head -20';

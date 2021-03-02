@@ -1,0 +1,213 @@
+# ====================================================== #
+#     EDITOR                                             #
+# ====================================================== #
+
+
+bold=$(tput bold)
+underline=$(tput sgr 0 1)
+reset=$(tput sgr0)
+
+# Foreground colors.
+black=$(tput setaf 0);
+red=$(tput setaf 1);
+green=$(tput setaf 2);
+yellow=$(tput setaf 3);
+blue=$(tput setaf 4);
+magenta=$(tput setaf 5);
+cyan=$(tput setaf 6);
+white=$(tput setaf 7);
+purple=$(tput setaf 171)
+
+# Background colors.
+bg_black=$(tput setab 0);
+bg_red=$(tput setab 1);
+bg_green=$(tput setab 2);
+bg_yellow=$(tput setab 3);
+bg_blue=$(tput setab 4);
+bg_magenta=$(tput setab 5);
+bg_cyan=$(tput setab 6);
+bg_white=$(tput setab 7);
+purple=$(tput setab 171)
+
+
+
+
+#  Set Terminal Edtior shortcuts.
+# ------------------------------------------------------------
+
+# Intro
+e-intro() {
+  printf "${bold}${bg_magenta}${white}      $1      ${reset}\n\n";
+}
+
+# Task. (e_note "I am a note")
+e-task() {
+  printf "${bold}${white}➜${reset}  ${white}%s${reset}\n" "$@"
+}
+
+# Success message. (e_success "I am a success message")
+e-success() {
+  printf "\n";
+  printf "${green}_____________________________________________%s${reset}\n"
+  printf "${green}✔ %s${reset}\n" "$@"
+  printf "\n\n";
+}
+
+
+
+# Header. (e_header "I am a sample script")
+e-header() {
+  printf "\n${bold}${bg_magenta}${white}==========  %s  ==========${reset}\n" "$@"
+}
+
+# Arrow.
+e-arrow() {
+  printf "\n";
+  printf "➜ $@\n"
+}
+
+# Check.
+e-check() {
+  printf "${green}✔ %s${reset}\n" "Done"
+}
+
+
+# Error message. (e_error "I am an error message")
+e-error() {
+  printf "${underline}${bold}${red}✖ ERROR in bump-version${reset}\n"
+  printf "${red}%s${reset}\n" "$@";
+  printf "\n\n";
+}
+
+# Warning message. (e_warning "I am a warning message")
+e-warning() {
+  printf "${tan}➜ %s${reset}\n" "$@"
+}
+
+# Underlined text. (e_underline "I am underlined text")
+e-underline() {
+  printf "${underline}${bold}%s${reset}\n" "$@"
+}
+
+# Bold text. (e_bold "I am bold text")
+e-bold() {
+  printf "${bold}%s${reset}\n" "$@"
+}
+
+
+
+
+
+
+
+#  FUNCTION: Log
+# ------------------------------------------------------------
+function log() {
+  echo '------------------------------';
+  echo "   $1";
+  echo '------------------------------';
+}
+
+
+#  FUNCTION: Note
+# ------------------------------------------------------------
+function note() {
+  echo "--- $1 ------";
+}
+
+
+
+#  FUNCTION: Uppercase
+# ------------------------------------------------------------
+function to_upper() {
+  echo "$1" | tr '[:lower:]' '[:upper:]';
+}
+
+
+#  FUNCTION: Lowercase
+# ------------------------------------------------------------
+function to_lower() {
+  echo "$1" | tr '[:upper:]' '[:lower:]';
+}
+
+
+#  FUNCTION: Remove punctuation.
+# ------------------------------------------------------------
+function remove_punctuation() {
+  echo "$1" | tr -d '[:punct:]';
+}
+
+
+#  FUNCTION: Spaces to Kebab-case.
+# ------------------------------------------------------------
+function kebab() {
+  echo ${1// /-};
+}
+
+
+#  FUNCTION: Spaces to underscores.
+# ------------------------------------------------------------
+function underscore() {
+  echo ${1// /_};
+}
+
+
+
+
+
+#  FUNCTION: Slugify
+# ------------------------------------------------------------
+function slugify() {
+  RAW=$1;
+  TYPE=$2;
+
+  # Remove punctuation.
+  RAW_PUNC="$(remove_punctuation $RAW)";
+
+  # Set to lowercase.
+  RAW_LC="$(to_lower $RAW_PUNC)";
+
+  # Check for modifier; add kebab or underscore.
+  if [ -z $TYPE ]; then
+    RAW_SLUG="$(kebab $RAW_LC)";
+  else
+    if [ $TYPE = '--underscore' ]; then
+      RAW_SLUG="$(underscore $RAW_LC)";
+    else
+      RAW_SLUG="$(kebab $RAW_LC)";
+    fi
+  fi
+
+  echo $RAW_SLUG;
+}
+
+
+
+# ------------------------------------------------------------
+#  RANDOMLY-GENERATED DATA
+# ------------------------------------------------------------
+
+
+#  FUNCTION: Random string.
+# ------------------------------------------------------------
+function rand_str() {
+  NUM=30;
+  TYPE=base64
+
+  # Check if parameter one was passed and is a valid number.
+  if ! [[ -z $1 ]]; then
+    NUM_REGEX='^[0-9]+$'
+    if [[ $1 =~ $NUM_REGEX ]] ; then
+      NUM=$1;
+    fi
+  fi
+
+  # Check if parameter two was passed and is a valid option.
+  if ! [[ -z $2 ]]; then
+    if [ $2 = 'hex' ] || [ $2 = 'base64' ]; then
+      TYPE=$2;
+    fi
+  fi
+
+  echo $(openssl rand -$TYPE $NUM);
+}

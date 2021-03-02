@@ -1,0 +1,21 @@
+{
+	"name": "nick-snyder-settings",
+	"version": "1.0.0",
+	"description": "A collection of system settings",
+	"main": "index.js",
+	"scripts": {
+		"build": "zsh $PWD/config/build",
+		"clean": "zsh $PWD/config/clean",
+		"deploy": "npm run build; zsh $PWD/config/deploy",
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ncksnydr/zsh-profiles.git"
+	},
+	"author": "",
+	"license": "UNLICENSED",
+	"bugs": {
+		"url": "https://github.com/ncksnydr/zsh-profiles/issues"
+	},
+	"homepage": "https://github.com/ncksnydr/zsh-profiles#readme"
+}

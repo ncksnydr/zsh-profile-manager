@@ -1,0 +1,282 @@
+#!/usr/bin/env zsh
+# ====================================================== #
+#     SPACESHIP THEME OPTIONS                            #
+# ====================================================== #
+
+
+
+#   Colors
+# ------------------------------------------------------------
+SPACESHIP_COLOR_PRIMARY='051';
+SPACESHIP_COLOR_SECONDARY='214';
+SPACESHIP_COLOR_TERTIARY='213';
+
+SPACESHIP_COLOR_SUCCESS='048';
+SPACESHIP_COLOR_FAILURE='124';
+
+SPACESHIP_COLOR_GRAY_DARK='237';
+SPACESHIP_COLOR_GRAY_LIGHT='245';
+SPACESHIP_COLOR_BLUE='039';
+
+SPACESHIP_COLOR_WHITE='255';
+
+
+
+#   Prompt
+# ------------------------------------------------------------
+
+# Defines the order in which sections are displayed in the prompt.
+SPACESHIP_PROMPT_ORDER=(time user dir git package node php aws jobs exit_code exec_time char);
+
+# Adds a newline character before each prompt line.
+SPACESHIP_PROMPT_ADD_NEWLINE=TRUE;
+
+# Make the prompt span across two lines.
+SPACESHIP_PROMPT_SEPARATE_LINE=TRUE;
+
+
+
+#   Char
+# ------------------------------------------------------------
+
+# Suffix after prompt character.
+SPACESHIP_CHAR_SUFFIX="\n";
+
+# Prompt character to be shown before any command.
+SPACESHIP_CHAR_SYMBOL='➜ ';
+
+# Prompt character to be shown before any command for the root user.
+SPACESHIP_CHAR_SYMBOL_ROOT="♔ $SPACESHIP_CHAR_SYMBOL";
+
+# Color of prompt character if last command completes successfully
+SPACESHIP_CHAR_COLOR_SUCCESS=$SPACESHIP_COLOR_SUCCESS;
+
+# Color of secondary prompt character
+SPACESHIP_CHAR_COLOR_SECONDARY=$SPACESHIP_COLOR_SECONDARY;
+
+# Color of prompt character if last command returns non-zero exit-code
+SPACESHIP_CHAR_COLOR_FAILURE=$SPACESHIP_COLOR_FAILURE;
+
+
+
+#   Time
+# ------------------------------------------------------------
+
+# Show time.
+SPACESHIP_TIME_SHOW=TRUE;
+
+# Prefix before time section.
+SPACESHIP_TIME_PREFIX='';
+
+# Suffix after time section.
+SPACESHIP_TIME_SUFFIX="%F{$SPACESHIP_COLOR_GRAY_LIGHT} | %f";
+
+# Color of time section.
+SPACESHIP_TIME_COLOR=$SPACESHIP_COLOR_GRAY_LIGHT;
+
+# Custom date formatting (http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Date-and-time).
+SPACESHIP_TIME_FORMAT="%D %T";
+
+# Format time using 12-hour clock (am/pm)
+SPACESHIP_TIME_12HR=FALSE;
+
+
+
+#   User
+# ------------------------------------------------------------
+
+# Show user section.
+SPACESHIP_USER_SHOW='always'
+
+# Prefix before user section.
+SPACESHIP_USER_PREFIX="%F{$SPACESHIP_COLOR_TERTIARY}@%f";
+
+# Suffix after user section.
+# SPACESHIP_USER_SUFFIX=''
+
+# Color of user section.
+SPACESHIP_USER_COLOR=$SPACESHIP_COLOR_TERTIARY;
+
+# Color of user section when it's root.
+SPACESHIP_USER_COLOR_ROOT=$SPACESHIP_COLOR_SUCCESS;
+
+
+
+#   Host
+# ------------------------------------------------------------
+
+# Show host section.
+SPACESHIP_HOST_SHOW='false';
+
+
+
+#   Directory
+# ------------------------------------------------------------
+
+# Show directory section.
+SPACESHIP_DIR_SHOW=TRUE;
+
+# Prefix before current directory.
+SPACESHIP_DIR_PREFIX='in ';
+
+# Number of folders of cwd to show in prompt, 0 to show all.
+SPACESHIP_DIR_TRUNC='3';
+
+# Prefix before cwd when it's truncated.
+SPACESHIP_DIR_TRUNC_PREFIX='../';
+
+# Color of directory section.
+SPACESHIP_DIR_COLOR=$SPACESHIP_COLOR_BLUE;
+
+# The symbol displayed if directory is write-protected.
+SPACESHIP_DIR_LOCK_SYMBOL='⧻';
+
+# Color for the lock symbol.
+SPACESHIP_DIR_LOCK_COLOR=$SPACESHIP_COLOR_FAILURE;
+
+
+
+#   Git
+# ------------------------------------------------------------
+
+# Show Git section.
+SPACESHIP_GIT_SHOW=TRUE;
+
+# Prefix before Git section.
+SPACESHIP_GIT_PREFIX='on ';
+
+# Suffix after Git section.
+# SPACESHIP_GIT_SUFFIX=''
+
+# Show Git branch subsection.
+SPACESHIP_GIT_BRANCH_SHOW=TRUE;
+
+# Suffix after Git branch subsection.
+SPACESHIP_GIT_BRANCH_SUFFIX='';
+
+# Color of Git branch subsection
+SPACESHIP_GIT_BRANCH_COLOR=$SPACESHIP_COLOR_SECONDARY;
+
+
+
+#   Package: Node.js
+# ------------------------------------------------------------
+
+# Show package version.
+SPACESHIP_PACKAGE_SHOW=TRUE;
+
+# Prefix before package version section.
+SPACESHIP_PACKAGE_PREFIX='is .';
+
+# Color of package version section.
+SPACESHIP_PACKAGE_COLOR=$SPACESHIP_COLOR_TERTIARY;
+
+# Current Node.js section
+SPACESHIP_NODE_SHOW=TRUE;
+
+# Character to be shown before Node.js version.
+# SPACESHIP_NODE_SYMBOL='';
+
+# Color of Node.js section.
+SPACESHIP_NODE_COLOR=$SPACESHIP_COLOR_SUCCESS;
+
+
+
+#   Package: PHP
+# ------------------------------------------------------------
+# Show PHP section.
+SPACESHIP_PHP_SHOW=TRUE;
+
+# Character to be shown before PHP version.
+SPACESHIP_PHP_SYMBOL='🐘';
+
+# Color of PHP section.
+SPACESHIP_PHP_COLOR=$SPACESHIP_COLOR_BLUE;
+
+
+
+#   Package: AWS
+# ------------------------------------------------------------
+
+# Show current selected AWS-cli profile or not.
+SPACESHIP_AWS_SHOW=TRUE;
+
+# Prefix before the AWS section.
+SPACESHIP_AWS_PREFIX='using ';
+
+# Character to be shown before AWS profile.
+# SPACESHIP_AWS_SYMBOL='';
+
+# Color of AWS section
+SPACESHIP_AWS_COLOR=$SPACESHIP_COLOR_SECONDARY;
+
+
+
+#   Execution Time
+# ------------------------------------------------------------
+
+# Show execution time
+SPACESHIP_EXEC_TIME_SHOW=TRUE;
+
+# Prefix before execution time section
+SPACESHIP_EXEC_TIME_PREFIX='(took ';
+
+# Suffix after execution time section.
+SPACESHIP_EXEC_TIME_SUFFIX=') ';
+
+# Color of execution time section.
+SPACESHIP_EXEC_TIME_COLOR=$SPACESHIP_COLOR_WHITE;
+
+# The minimum number of seconds for showing execution time section.
+SPACESHIP_EXEC_TIME_ELAPSED='6';
+
+
+
+#   Battery
+# ------------------------------------------------------------
+
+# Show battery section or not.
+SPACESHIP_BATTERY_SHOW=FALSE;
+
+# Character to be shown if battery is charging.
+SPACESHIP_BATTERY_SYMBOL_CHARGING='⚡ ';
+
+# Character to be shown if battery is discharging.
+SPACESHIP_BATTERY_SYMBOL_DISCHARGING='◒ ';
+
+# Character to be shown if battery is full.
+SPACESHIP_BATTERY_SYMBOL_FULL='● ';
+
+
+
+#   Jobs
+# ------------------------------------------------------------
+
+# Show background jobs indicator.
+SPACESHIP_JOBS_SHOW=TRUE;
+
+# Character to be shown when jobs are hiding.
+# SPACESHIP_JOBS_SYMBOL='';
+
+# Color of background jobs section.
+# SPACESHIP_JOBS_COLOR='';
+
+
+
+#   Exit code
+# ------------------------------------------------------------
+
+# Show exit code of last command.
+SPACESHIP_EXIT_CODE_SHOW=TRUE;
+
+# Prefix before exit code section.
+# SPACESHIP_EXIT_CODE_PREFIX='';
+
+# Suffix after exit code section;
+# SPACESHIP_EXIT_CODE_SUFFIX='';
+
+# Character to be shown before exit code.
+SPACESHIP_EXIT_CODE_SYMBOL='✘';
+
+# Color of exit code section.
+SPACESHIP_EXIT_CODE_COLOR=$SPACESHIP_COLOR_FAILURE;

@@ -1,0 +1,28 @@
+#!/usr/bin/env zsh
+# ====================================================== #
+#     CLEAN                                              #
+# ====================================================== #
+
+#   Set variables
+# ------------------------------------------------------------
+ROOT=$PWD;
+source $ROOT/config/editor-config;
+source $ROOT/.env;
+BUILD_DIR=$ROOT/$BUILD_PATH;
+
+
+#   Announce
+# ------------------------------------------------------------
+e-header "CLEAN PROJECT"
+
+
+#   Clean old directories
+# ------------------------------------------------------------
+e-task "Removing previous build...";
+rm -rf $BUILD_DIR
+e-check;
+
+
+#   Success
+# ------------------------------------------------------------
+e-success "Success: project cleaned"

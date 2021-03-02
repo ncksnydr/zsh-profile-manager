@@ -1,0 +1,65 @@
+#!/usr/bin/env zsh
+
+# ====================================================== #
+#     02. VERBS (SERVER)                                 #
+# ====================================================== #
+#         Restart                                        #
+#         Start                                          #
+#         Stop                                           #
+# ====================================================== #
+
+
+
+
+#   Restart
+# ------------------------------------------------------------
+
+#   TODO: Convert to Digital Ocean
+# ------------------------------------------------------------
+# # Restart MariaDB services.
+# alias restart-mariadb='brew services restart mariadb';
+# # Restart nginx services.
+# alias restart-nginx='brew services restart nginx';
+# # Restart PHP services.
+# alias restart-php='brew services restart php';
+# # Reload Shell profile.
+# alias restart-shell="source $HOME/.zshrc";
+# # Restart local server.
+# alias restart-server="sudo shutdown -r now";
+
+
+
+#   Start
+# ------------------------------------------------------------
+
+#   TODO: Convert to Digital Ocean
+# ------------------------------------------------------------
+# # Start MariaDB services.
+# alias start-mariadb='brew services start mariadb';
+# # Start nginx services.
+# alias start-nginx='brew services start nginx';
+# # Start PHP services.
+# alias start-php='brew services start php';
+# # Start PHP services.
+# alias start-server='brew services start nginx; brew services start mariadb; brew services start php';
+
+
+
+#   Stop
+# ------------------------------------------------------------
+
+#   TODO: Convert to Digital Ocean
+# ------------------------------------------------------------
+# # Stop MariaDB services.
+# alias stop-mariadb='brew services stop mariadb';
+# # Stop nginx services.
+# alias stop-nginx='brew services stop nginx';
+# # Stop PHP services.
+# alias stop-php='brew services stop php';
+# # Stop server..
+# alias stop-server='brew services stop --all';
+
+
+#   Update
+# ------------------------------------------------------------
+alias update-server='sudo apt update';
